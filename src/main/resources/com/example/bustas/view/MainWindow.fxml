@@ -18,7 +18,7 @@
 
     <HBox spacing="50" alignment="CENTER_LEFT">
         <Label text="Amount" styleClass="label-main"/>
-        <Slider fx:id="loanAmountSlider" min="5000" max="1000000" value="5000"
+        <Slider fx:id="loanAmountSlider" min="5000" max="1000000" value="100000"
                 blockIncrement="1000"
                 majorTickUnit="1000"
                 minorTickCount="0"
@@ -29,23 +29,24 @@
 
     <HBox spacing="50" alignment="CENTER_LEFT">
         <Label text="Interest Rate (%)" styleClass="label-main" />
-        <Slider fx:id="rateAmountSlider" min="0" max="100" blockIncrement="5"
-                majorTickUnit="20" minorTickCount="2" styleClass="loan-slider"/>
+        <Slider fx:id="rateAmountSlider" min="0" max="20" blockIncrement="5"
+                majorTickUnit="5" minorTickCount="1" styleClass="loan-slider"
+                value="4"/>
         <TextField fx:id="interestRateField" />
     </HBox>
 
     <HBox spacing="50" alignment="CENTER_LEFT">
-        <Label text="Term (years)" styleClass="label-main" />
-        <Slider fx:id="termAmountSlider" min="2" max="60" blockIncrement="1"
+        <Label text="Term (months)" styleClass="label-main" />
+        <Slider fx:id="termAmountSlider" min="12" max="480" blockIncrement="1" value="180"
                 majorTickUnit="10" minorTickCount="1" styleClass="loan-slider"/>
         <TextField fx:id="termField" />
     </HBox>
 
     <!-- Buttons -->
     <HBox spacing="10">
-        <Button text="Calculate" fx:id="calculateButton" styleClass="button-action" />
-        <Button text="Export Report" fx:id="exportButton" styleClass="button-action"/>
-        <Button text="Apply Deferral" fx:id="deferralButton" styleClass="button-action"/>
+        <Button text="Calculate Linear" fx:id="calculateLinear" styleClass="button-action" />
+        <Button text="Calculate Annuity" fx:id="calculateAnnuity" styleClass="button-action"/>
+
     </HBox>
 
     <!-- Output Table -->

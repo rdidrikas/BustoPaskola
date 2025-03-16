@@ -43,7 +43,7 @@
 }
 
 .text-field {
-    -fx-pref-width: 100px; /* Set text field width */
+    -fx-pref-width: 110px; /* Set text field width */
     -fx-font-size: 14px;   /* Increase font size */
     -fx-background-color: #FFFFFF;
     -fx-border-color: #caf0f8;

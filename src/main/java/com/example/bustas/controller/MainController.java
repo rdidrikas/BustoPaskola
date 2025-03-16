@@ -12,9 +12,8 @@ import javafx.util.converter.NumberStringConverter;
 
 public class MainController {
 
-    @FXML private Button calculateButton;
-    @FXML private Button exportButton;
-    @FXML private Button deferralButton;
+    @FXML private Button calculateAnnuity;
+    @FXML private Button calculateLinear;
 
     @FXML private Slider loanAmountSlider;
     @FXML private TextField loanAmountField;
@@ -28,30 +27,44 @@ public class MainController {
     @FXML
     private void initialize() {
         // Set up event handlers
-        calculateButton.setOnAction(event -> calculatePayments());
-        exportButton.setOnAction(event -> exportReport());
-        deferralButton.setOnAction(event -> applyDeferral());
+        calculateLinear.setOnAction(event -> calculatePayments());
+        calculateAnnuity.setOnAction(event -> calculatePayments());
 
         // Set up bindings
 
         // Loan amount slider and text field
-        loanAmountField.textProperty().bindBidirectional(loanAmountSlider.valueProperty(), new NumberStringConverter());
+
+        loanAmountField.setText(String.format("€%.0f", loanAmountSlider.getValue())); // For first value
+
         loanAmountSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            loanAmountSlider.setValue(Math.round(newVal.doubleValue() / 1000) * 1000); // Round to nearest 1000 euro
+            double value = Math.round(newVal.doubleValue() / 1000) * 1000;
+            loanAmountSlider.setValue(value); // Round to nearest 1000 euro
+            loanAmountField.setText(String.format("€%.0f", value));
+
         });
 
 
         // Interest rate slider and text field
-        interestRateField.textProperty().bindBidirectional(rateAmountSlider.valueProperty(), new NumberStringConverter());
+
+        interestRateField.setText(String.format("%.0f%%", rateAmountSlider.getValue())); // For first value
+
         rateAmountSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            rateAmountSlider.setValue(Math.round(newVal.doubleValue())); // Round to nearest 1%
+            double value = Math.round(newVal.doubleValue());
+            rateAmountSlider.setValue(value); // Round to nearest %
+            interestRateField.setText(String.format("%.0f%%", value));
+
         });
 
 
         // Term slider and text field
-        termField.textProperty().bindBidirectional(termAmountSlider.valueProperty(), new NumberStringConverter());
+
+        termField.setText(String.format("%.0f month(s)", termAmountSlider.getValue())); // For first value
+
         termAmountSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            termAmountSlider.setValue(Math.round(newVal.doubleValue())); // Round to nearest year
+            double value = Math.round(newVal.doubleValue());
+            termAmountSlider.setValue(value); // Round to nearest month
+            termField.setText(String.format("%.0f month(s)", value));
+
         });
 
 
