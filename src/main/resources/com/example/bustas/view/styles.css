@@ -1,0 +1,64 @@
+/* styles.css */
+.root {
+    -fx-font-family: "Open Sans";
+    -fx-font-size: 14px;
+    -fx-background-color: #d8e2dc;
+    -fx-padding: 20;
+}
+
+/* Button styling */
+
+.button-action {
+    -fx-background-color: #0096c7; /* Blue color for buttons */
+    -fx-text-fill: white;          /* White text color */
+    -fx-font-size: 14px;           /* Increase font size */
+    -fx-pref-width: 100px;         /* Set button width */
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+    -fx-background-radius: 5;
+
+}
+.button-action:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* Slider styling */
+.loan-slider {
+    -fx-pref-width: 300px; /* Set slider width */
+    -fx-padding: 10 0;
+}
+
+.loan-slider .axis {
+    -fx-tick-label-fill: #3498db; /* Blue color for tick labels */
+    -fx-tick-label-font-size: 12px;
+}
+
+.loan-slider .track {
+    -fx-background-color: #bdc3c7;
+
+}
+
+.loan-slider .thumb {
+    -fx-background-color: #3498db;
+}
+
+.text-field {
+    -fx-pref-width: 100px; /* Set text field width */
+    -fx-font-size: 14px;   /* Increase font size */
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #caf0f8;
+    -fx-border-width: 3px;
+    -fx-border-radius: 5;
+
+}
+
+.table-view {
+    -fx-font-size: 14px; /* Increase table font size */
+    -fx-background-color: #F2E2B1;
+}
+
+.label-main {
+    -fx-font-size: 24px;   /* Increase label font size */
+    -fx-font-weight: bold; /* Make labels bold */
+    -fx-pref-width: 250px;
+}

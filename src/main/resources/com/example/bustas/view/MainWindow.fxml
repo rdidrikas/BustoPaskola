@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- MainWindow.fxml -->
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Slider?>
+
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bustas.controller.MainController"
+      spacing="20" alignment="CENTER" stylesheets="@styles.css">
+    <!-- Input Section -->
+
+    <HBox spacing="50" alignment="CENTER_LEFT">
+        <Label text="Amount" styleClass="label-main"/>
+        <Slider fx:id="loanAmountSlider" min="5000" max="1000000" value="5000"
+                blockIncrement="1000"
+                majorTickUnit="1000"
+                minorTickCount="0"
+                snapToTicks="true"
+                styleClass="loan-slider"/>
+        <TextField fx:id="loanAmountField" />
+    </HBox>
+
+    <HBox spacing="50" alignment="CENTER_LEFT">
+        <Label text="Interest Rate (%)" styleClass="label-main" />
+        <Slider fx:id="rateAmountSlider" min="0" max="100" blockIncrement="5"
+                majorTickUnit="20" minorTickCount="2" styleClass="loan-slider"/>
+        <TextField fx:id="interestRateField" />
+    </HBox>
+
+    <HBox spacing="50" alignment="CENTER_LEFT">
+        <Label text="Term (years)" styleClass="label-main" />
+        <Slider fx:id="termAmountSlider" min="2" max="60" blockIncrement="1"
+                majorTickUnit="10" minorTickCount="1" styleClass="loan-slider"/>
+        <TextField fx:id="termField" />
+    </HBox>
+
+    <!-- Buttons -->
+    <HBox spacing="10">
+        <Button text="Calculate" fx:id="calculateButton" styleClass="button-action" />
+        <Button text="Export Report" fx:id="exportButton" styleClass="button-action"/>
+        <Button text="Apply Deferral" fx:id="deferralButton" styleClass="button-action"/>
+    </HBox>
+
+    <!-- Output Table -->
+</VBox>
