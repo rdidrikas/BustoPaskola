@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="749.0" prefWidth="811.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bustas.controller.ResultsController">
    <children>
-      <LineChart layoutX="40.0" layoutY="14.0" prefHeight="327.0" prefWidth="659.0">
+      <LineChart layoutX="40.0" layoutY="14.0" prefHeight="327.0" prefWidth="659.0" fx:id="paymentChart">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -18,10 +18,13 @@
           <NumberAxis side="LEFT" stylesheets="@styles.css" />
         </yAxis>
       </LineChart>
-      <TableView layoutX="71.0" layoutY="341.0" prefHeight="294.0" prefWidth="643.0">
+      <TableView layoutX="71.0" layoutY="341.0" prefHeight="294.0" prefWidth="643.0" fx:id="paymentTable">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn text="Month" fx:id="monthColumn" />
+            <TableColumn text="Payment Date" fx:id="dateColumn" />
+            <TableColumn text="Principal (€)" fx:id="principalColumn" />
+            <TableColumn text="Interest (€)" fx:id="interestColumn" />
+            <TableColumn text="Remaining Balance (€)" fx:id="balanceColumn" />
         </columns>
       </TableView>
       <Button layoutX="71.0" layoutY="682.0" mnemonicParsing="false" onAction="#handleBackButton" styleClass="button-action" stylesheets="@styles.css" text="Back" />

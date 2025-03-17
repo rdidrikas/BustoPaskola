@@ -1,5 +1,8 @@
 package com.example.bustas.controller;
 
+import com.example.bustas.model.AnnuityLoan;
+import com.example.bustas.model.LinearLoan;
+import com.example.bustas.model.Loan;
 import com.example.bustas.model.PaymentEntry;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -18,6 +21,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.util.converter.NumberStringConverter;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class MainController {
@@ -42,31 +47,31 @@ public class MainController {
 
         // Loan amount slider and text field
 
-        loanAmountField.setText(String.format("€%.0f", loanAmountSlider.getValue())); // For first value
-
         loanAmountSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             double value = Math.round(newVal.doubleValue() / 1000) * 1000;
             loanAmountSlider.setValue(value); // Round to nearest 1000 euro
-            loanAmountField.setText(String.format("€%.0f", value));
+            loanAmountField.setText(String.format("%.0f €", value));
 
         });
 
+        loanAmountField.textProperty().bindBidirectional(loanAmountSlider.valueProperty(), new NumberStringConverter());
+
+        loanAmountField.setText(String.format("%.0f €", loanAmountSlider.getValue())); // For first value
 
         // Interest rate slider and text field
 
-        interestRateField.setText(String.format("%.0f%%", rateAmountSlider.getValue())); // For first value
-
         rateAmountSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            double value = Math.round(newVal.doubleValue());
+            double value = Math.round(newVal.doubleValue() / 0.25f) * 0.25f;
             rateAmountSlider.setValue(value); // Round to nearest %
-            interestRateField.setText(String.format("%.0f%%", value));
+            interestRateField.setText(String.format("%.2f%%", value));
 
         });
 
+        interestRateField.textProperty().bindBidirectional(rateAmountSlider.valueProperty(), new NumberStringConverter());
+
+        interestRateField.setText(String.format("%.0f%%", rateAmountSlider.getValue())); // For first value
 
         // Term slider and text field
-
-        termField.setText(String.format("%.0f month(s)", termAmountSlider.getValue())); // For first value
 
         termAmountSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             double value = Math.round(newVal.doubleValue());
@@ -74,6 +79,10 @@ public class MainController {
             termField.setText(String.format("%.0f month(s)", value));
 
         });
+
+        termField.textProperty().bindBidirectional(termAmountSlider.valueProperty(), new NumberStringConverter());
+
+        termField.setText(String.format("%.0f month(s)", termAmountSlider.getValue())); // For first value
 
 
 
@@ -95,9 +104,20 @@ public class MainController {
         this.primaryStage.setScene(graphScene);
         this.primaryStage.show();
 
-        ResultsController resultsController = loader.getController();
+        Loan loan = null;
 
-        resultsController.initializeData(this.primaryStage, mainScene);
+        if(type == "linear") {
+            this.primaryStage.setTitle("Linear Loan Payment Schedule");
+            loan = new LinearLoan(loanAmountSlider.getValue(), rateAmountSlider.getValue(), LocalDate.now(), (int) termAmountSlider.getValue());
+        } else {
+            this.primaryStage.setTitle("Annuity Loan Payment Schedule");
+            loan = new AnnuityLoan(loanAmountSlider.getValue(), rateAmountSlider.getValue(), LocalDate.now(), (int) termAmountSlider.getValue());
+        }
+
+        List<PaymentEntry> payments = loan.calculatePayments();
+
+        ResultsController resultsController = loader.getController();
+        resultsController.initializeData(this.primaryStage, mainScene, payments);
 
     }
 

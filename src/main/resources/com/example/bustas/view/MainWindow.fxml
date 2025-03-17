@@ -21,7 +21,7 @@
 
     <HBox alignment="CENTER_LEFT" spacing="50">
         <Label styleClass="label-main" text="Interest Rate (%)" />
-        <Slider fx:id="rateAmountSlider" blockIncrement="5" majorTickUnit="5" max="20" min="0" minorTickCount="1" styleClass="loan-slider" value="4" />
+        <Slider fx:id="rateAmountSlider" blockIncrement="0.25" majorTickUnit="5" max="20" min="0" styleClass="loan-slider" value="4" />
         <TextField fx:id="interestRateField" />
     </HBox>
 
