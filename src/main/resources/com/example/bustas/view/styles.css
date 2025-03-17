@@ -61,3 +61,65 @@
     -fx-font-weight: bold; /* Make labels bold */
     -fx-pref-width: 250px;
 }
+
+/* Chart styling */
+.chart {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1px;
+    -fx-padding: 15px;
+}
+
+/* Chart title */
+.chart-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50; /* Dark blue-gray */
+}
+
+/* Axis labels */
+.axis-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Axis tick labels */
+.axis-tick-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7f8c8d; /* Gray */
+}
+
+/* Chart lines */
+
+.default-color0.chart-series-line {
+    -fx-stroke: #3498db;
+}
+
+.default-color1.chart-series-line {
+    -fx-stroke: #e74c3c;
+    -fx-stroke-dash-array: 5 5;
+}
+
+.chart-line-symbol {
+    -fx-background-color: transparent;
+    -fx-padding: 0px;
+}
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+.chart-legend-item-symbol {
+    -fx-pref-width: 20px;
+    -fx-pref-height: 20px;
+    -fx-background-radius: 0; /* Square */
+}
+
+.default-color0.chart-legend-item-symbol {
+    -fx-background-color: #3498db;
+}
+.default-color1.chart-legend-item-symbol {
+    -fx-background-color: #e74c3c;
+}
+
+

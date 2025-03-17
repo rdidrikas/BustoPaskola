@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -8,25 +7,25 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="749.0" prefWidth="811.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bustas.controller.ResultsController">
+<AnchorPane prefHeight="893.0" prefWidth="1057.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bustas.controller.ResultsController">
    <children>
-      <LineChart layoutX="40.0" layoutY="14.0" prefHeight="327.0" prefWidth="659.0" fx:id="paymentChart">
+      <LineChart fx:id="paymentChart" layoutX="44.0" layoutY="410.0" prefHeight="443.0" prefWidth="972.0" stylesheets="@styles.css" title="Principal vs Interest">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <NumberAxis side="BOTTOM" styleClass="axis-label"  />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" stylesheets="@styles.css" />
+          <NumberAxis side="LEFT" styleClass="chart-series-line" />
         </yAxis>
       </LineChart>
-      <TableView layoutX="71.0" layoutY="341.0" prefHeight="294.0" prefWidth="643.0" fx:id="paymentTable">
+      <TableView fx:id="paymentTable" layoutX="292.0" layoutY="40.0" prefHeight="340.0" prefWidth="724.0">
         <columns>
-            <TableColumn text="Month" fx:id="monthColumn" />
-            <TableColumn text="Payment Date" fx:id="dateColumn" />
-            <TableColumn text="Principal (€)" fx:id="principalColumn" />
-            <TableColumn text="Interest (€)" fx:id="interestColumn" />
-            <TableColumn text="Remaining Balance (€)" fx:id="balanceColumn" />
+            <TableColumn fx:id="monthColumn" text="Month" />
+            <TableColumn fx:id="dateColumn" prefWidth="138.0" text="Payment Date" />
+            <TableColumn fx:id="principalColumn" prefWidth="103.0" text="Principal (€)" />
+            <TableColumn fx:id="interestColumn" prefWidth="93.0" text="Interest (€)" />
+            <TableColumn fx:id="balanceColumn" prefWidth="228.0" text="Remaining Balance (€)" />
         </columns>
       </TableView>
-      <Button layoutX="71.0" layoutY="682.0" mnemonicParsing="false" onAction="#handleBackButton" styleClass="button-action" stylesheets="@styles.css" text="Back" />
+      <Button layoutX="44.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="36.0" prefWidth="143.0" styleClass="button-action"  text="Back" />
    </children>
 </AnchorPane>

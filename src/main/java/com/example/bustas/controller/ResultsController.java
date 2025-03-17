@@ -1,16 +1,15 @@
 package com.example.bustas.controller;
 
-import com.example.bustas.model.Loan;
 import com.example.bustas.model.PaymentEntry;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -87,10 +86,17 @@ public class ResultsController {
     }
 
     private void initializeChart(List<PaymentEntry> payments) {
-        XYChart.Series<Number, Number> principalSeries = new XYChart.Series<>();
-        XYChart.Series<Number, Number> interestSeries = new XYChart.Series<>();
 
+        NumberAxis xAxis = (NumberAxis) paymentChart.getXAxis();
+        NumberAxis yAxis = (NumberAxis) paymentChart.getYAxis();
+
+        xAxis.setLabel("Month");
+        yAxis.setLabel("Amount (€)");
+        yAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(yAxis, "€", null));
+
+        XYChart.Series<Number, Number> principalSeries = new XYChart.Series<>();
         principalSeries.setName("Principal");
+        XYChart.Series<Number, Number> interestSeries = new XYChart.Series<>();
         interestSeries.setName("Interest");
 
         for (PaymentEntry payment : payments) {
@@ -98,8 +104,8 @@ public class ResultsController {
             interestSeries.getData().add(new XYChart.Data<>(payment.getMonth(), payment.getInterest()));
         }
 
-        //paymentChart.getData().clear();
-        //paymentChart.getData().addAll(principalSeries, interestSeries);
+        paymentChart.getData().clear();
+        paymentChart.getData().addAll(principalSeries, interestSeries);
 
     }
 
