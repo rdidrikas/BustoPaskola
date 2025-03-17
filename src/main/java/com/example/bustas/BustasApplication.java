@@ -1,5 +1,7 @@
 package com.example.bustas;
 
+
+import com.example.bustas.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -21,14 +23,19 @@ public class BustasApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(
-                getClass().getResource("/com/example/bustas/view/MainWindow.fxml")
-        ));
-        // Group root = new Group();
-        Scene scene = new Scene(root, 1080, 720, Color.color(0.2, 0.2, 0.2));
-        //scene.getStylesheets().add("src/main/resources/com/example/bustas/view/styles.css");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/bustas/view/MainWindow.fxml"));
+        Parent root = loader.load(); // Loads the FXML and creates the controller
+
+        Scene scene = new Scene(root);
+
+        String css = this.getClass().getResource("/com/example/bustas/view/styles.css").toExternalForm();
+        scene.getStylesheets().add(css);
 
         primaryStage.setScene(scene);
+
+        MainController mainController = loader.getController();
+        mainController.setPrimaryStage(primaryStage);
+
         primaryStage.setTitle("Busto Paskola");
         primaryStage.show();
     }

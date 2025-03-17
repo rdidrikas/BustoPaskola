@@ -12,7 +12,6 @@
     -fx-background-color: #0096c7; /* Blue color for buttons */
     -fx-text-fill: white;          /* White text color */
     -fx-font-size: 14px;           /* Increase font size */
-    -fx-pref-width: 100px;         /* Set button width */
     -fx-font-weight: bold;
     -fx-padding: 8 15;
     -fx-background-radius: 5;

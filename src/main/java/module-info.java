@@ -1,6 +1,7 @@
 module com.example.bustas {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
     // Open the controller package to JavaFX
     opens com.example.bustas.controller to javafx.fxml;
