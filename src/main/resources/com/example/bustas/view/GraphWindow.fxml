@@ -11,7 +11,7 @@
    <children>
       <LineChart fx:id="paymentChart" layoutX="44.0" layoutY="410.0" prefHeight="443.0" prefWidth="972.0" stylesheets="@styles.css" title="Principal vs Interest">
         <xAxis>
-          <NumberAxis side="BOTTOM" styleClass="axis-label"  />
+          <NumberAxis side="BOTTOM" styleClass="axis-label" />
         </xAxis>
         <yAxis>
           <NumberAxis side="LEFT" styleClass="chart-series-line" />
@@ -23,9 +23,10 @@
             <TableColumn fx:id="dateColumn" prefWidth="138.0" text="Payment Date" />
             <TableColumn fx:id="principalColumn" prefWidth="103.0" text="Principal (€)" />
             <TableColumn fx:id="interestColumn" prefWidth="93.0" text="Interest (€)" />
-            <TableColumn fx:id="balanceColumn" prefWidth="228.0" text="Remaining Balance (€)" />
+            <TableColumn fx:id="balanceColumn" prefWidth="228.0" text="Remaining Debt (€)" />
         </columns>
       </TableView>
-      <Button layoutX="44.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="36.0" prefWidth="143.0" styleClass="button-action"  text="Back" />
+      <Button layoutX="44.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="36.0" prefWidth="143.0" styleClass="button-action" text="Back" />
+      <Button layoutX="44.0" layoutY="116.0" mnemonicParsing="false" onAction="#exportPDF" prefHeight="36.0" prefWidth="143.0" styleClass="button-action" text="Export PDF" />
    </children>
 </AnchorPane>

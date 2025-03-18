@@ -3,14 +3,27 @@ package com.example.bustas.controller;
 import com.example.bustas.model.PaymentEntry;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -39,7 +52,6 @@ public class ResultsController {
         interestColumn.setCellValueFactory(cellData -> cellData.getValue().interestProperty().asObject());
         balanceColumn.setCellValueFactory(cellData -> cellData.getValue().remainingBalanceProperty().asObject());
 
-        // Format collumns
         principalColumn.setCellFactory(col -> new TableCell<PaymentEntry, Double>() {
             @Override
             protected void updateItem(Double value, boolean empty) {
@@ -112,6 +124,58 @@ public class ResultsController {
     @FXML
     private void handleBackButton() {
         this.stage.setScene(previousScene); // Return to the main window
+    }
+
+    @FXML
+    private void exportPDF() {
+
+        String fileName = handleExport();
+        createPdfTable(paymentTable);
+
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(fileName + ".pdf"));
+            document.open();
+            document.add(new Paragraph("Loan Payment Schedule\n\n"));
+            document.add(createPdfTable(paymentTable));
+            document.close();
+        } catch (DocumentException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private PdfPTable createPdfTable(TableView<?> table) throws DocumentException {
+
+        int numColumns = table.getColumns().size();
+        PdfPTable pdfTable = new PdfPTable(numColumns);
+
+        for (int i = 0; i < numColumns; i++) {
+            pdfTable.addCell(table.getColumns().get(i).getText());
+        }
+
+        for (int i = 0; i < table.getItems().size(); i++) {
+            for (int j = 0; j < numColumns; j++) {
+                Object value = table.getColumns().get(j).getCellData(i);
+                pdfTable.addCell(value.toString());
+            }
+        }
+
+        return pdfTable;
+    }
+
+    private String handleExport(){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Export to PDF");
+        dialog.setHeaderText(null);
+        dialog.setContentText("File name:");
+
+        String css = getClass().getResource("/com/example/bustas/view/styles.css").toExternalForm();
+        dialog.getDialogPane().getStylesheets().add(css);
+
+        dialog.showAndWait();
+
+        return dialog.getResult();
     }
 
 }

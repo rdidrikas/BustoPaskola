@@ -122,4 +122,21 @@
     -fx-background-color: #e74c3c;
 }
 
+.custom-dialog-pane {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #f0f4ff;
+    -fx-border-color: #d0ddff;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);
+}
 
+.custom-dialog-pane .button-bar {
+    -fx-background-color: #e0e7ff;
+}
+
+.custom-dialog-pane .header-panel {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}

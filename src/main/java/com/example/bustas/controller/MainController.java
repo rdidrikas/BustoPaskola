@@ -121,16 +121,6 @@ public class MainController {
 
     }
 
-    private void exportReport() {
-        // Logic to export the payment schedule
-        System.out.println("Exporting report...");
-    }
-
-    private void applyDeferral() {
-        // Logic to apply deferral
-        System.out.println("Applying deferral...");
-    }
-
 
     public void setLinear(ActionEvent event) throws IOException {
         calculatePayments("linear", event);
