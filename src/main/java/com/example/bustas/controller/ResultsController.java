@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ArrayList;
 
 public class ResultsController {
 
@@ -176,6 +177,79 @@ public class ResultsController {
         dialog.showAndWait();
 
         return dialog.getResult();
+    }
+
+    @FXML
+    private void postpone() {
+
+        // Month delay pop up
+        TextInputDialog postponeDialog = new TextInputDialog();
+        postponeDialog.setTitle("Postpone Payments");
+        postponeDialog.setHeaderText(null);
+        postponeDialog.setContentText("Enter number of months to postpone:");
+
+        String css = getClass().getResource("/com/example/bustas/view/styles.css").toExternalForm();
+        postponeDialog.getDialogPane().getStylesheets().add(css);
+        postponeDialog.showAndWait();
+        String postpone = postponeDialog.getResult();
+
+        if (postpone == null) return;
+
+        int postponeMonths = 0;
+        try {
+            postponeMonths = Integer.parseInt(postpone);
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid number for postpone months.");
+            postpone();
+        }
+
+        // Interest Rate pop up
+        TextInputDialog interestDialog = new TextInputDialog();
+        interestDialog.setTitle("Postpone Payments");
+        interestDialog.setHeaderText(null);
+        interestDialog.setContentText("Enter additional (yearly) interest rate (in %):");
+        interestDialog.getDialogPane().getStylesheets().add(css);
+        interestDialog.showAndWait();
+
+        String interestResult = interestDialog.getResult();
+
+        if (interestResult == null) return;
+
+        double postponeRate = 0;
+        try {
+            postponeRate = Double.parseDouble(interestResult) / 100.0;
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid interest rate.");
+            postpone();
+        }
+
+        // Get the current payment schedule from the table
+        List<PaymentEntry> originalPayments = paymentTable.getItems();
+        if (originalPayments.isEmpty()) return;
+
+        PaymentEntry firstPayment = originalPayments.get(0); // First payment date needed
+        double originalLoanAmount = firstPayment.getPrincipal() + firstPayment.getRemainingBalance();
+
+        List<PaymentEntry> newPayments = new ArrayList<>(); // New payments
+
+        for (int i = 1; i <= postponeMonths; i++) {
+            PaymentEntry postponeEntry = new PaymentEntry(i, firstPayment.getPaymentDate().plusMonths(i - 1), 0.0,
+                    originalLoanAmount * (postponeRate / 12), originalLoanAmount);
+            postponeEntry.setMonth(i);
+            newPayments.add(postponeEntry);
+        }
+
+        // Shift each payment's month and payment date forward by the postpone period and add to new list
+        for (PaymentEntry payment : originalPayments) {
+            payment.setMonth(payment.getMonth() + postponeMonths);
+            payment.setPaymentDate(payment.getPaymentDate().plusMonths(postponeMonths));
+            newPayments.add(payment); // Adding to the new list
+        }
+
+        // Refresh the table and chart
+        paymentTable.getItems().setAll(newPayments);
+        paymentTable.refresh();
+        initializeChart(newPayments);
     }
 
 }

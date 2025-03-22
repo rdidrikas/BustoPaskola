@@ -43,7 +43,7 @@ public class PaymentEntry { // Data class for monthly payment details
         return remainingBalance;
     }
 
-    // Standard getters for properties
+   // Getters for values
     public int getMonth() {
         return month.get();
     }
@@ -64,5 +64,25 @@ public class PaymentEntry { // Data class for monthly payment details
         return remainingBalance.get();
     }
 
+    // Setters for values
+    public void setMonth(int month) {
+        this.month.set(month);
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate.set(paymentDate);
+    }
+
+    public void setPrincipal(double principal) {
+        this.principal.set(principal);
+    }
+
+    public void setInterest(double interest) {
+        this.interest.set(interest);
+    }
+
+    public void setRemainingBalance(double remainingBalance) {
+        this.remainingBalance.set(remainingBalance);
+    }
 
 }
